@@ -1,0 +1,30 @@
+{
+  "name": "campusiq",
+  "version": "1.0.0",
+  "description": "CampusIQ — AI-Powered Student Success & Campus Intelligence Platform",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev:server": "node server/index.js",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "build": "node -e \"console.log('Using pre-built frontend/dist')\""
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "education-analytics",
+    "student-success",
+    "ai-copilot",
+    "early-warning-system",
+    "fastapi",
+    "react"
+  ],
+  "author": "CampusIQ Team",
+  "license": "MIT"
+}

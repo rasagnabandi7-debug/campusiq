@@ -1,0 +1,11 @@
+student_id,name,department,academic_year,semester,cgpa,internal_marks,backlogs,attendance_percentage,login_frequency,assignment_completion,coding_score,aptitude_score,mock_interview_score,communication_score
+STU-9001,Aanya Kapoor,Computer Science & Engineering,3,5,8.7,82.0,0,91.0,24,94.0,38.0,52.0,50.0,72.0
+STU-9002,Kabir Mehta,Electronics & Communication,4,7,5.8,36.0,2,58.0,5,30.0,42.0,40.0,38.0,48.0
+STU-9003,Riya Sen,Data Science & AI,3,5,9.4,90.0,0,95.0,30,98.0,94.0,92.0,88.0,90.0
+STU-9004,Tanmay Joshi,Mechanical Engineering,2,3,6.4,49.0,1,68.0,12,55.0,46.0,58.0,52.0,60.0
+STU-9005,Pooja Hegde,Information Technology,3,6,8.1,78.0,0,82.0,20,88.0,76.0,72.0,70.0,78.0
+STU-9006,Arnav Saxena,Electrical & Electronics,4,7,6.1,42.0,1,61.0,8,44.0,40.0,45.0,42.0,50.0
+STU-9007,Ishita Sharma,Computer Science & Engineering,4,8,8.9,86.0,0,88.0,26,92.0,42.0,55.0,50.0,75.0
+STU-9008,Gaurav Kulkarni,Electronics & Communication,3,5,5.2,32.0,3,52.0,3,28.0,36.0,38.0,35.0,42.0
+STU-9009,Sneha Pillai,Data Science & AI,2,4,7.8,70.0,0,79.0,18,78.0,68.0,70.0,65.0,70.0
+STU-9010,Karthik Rao,Mechanical Engineering,3,6,7.2,65.0,0,74.0,15,70.0,58.0,62.0,58.0,64.0
