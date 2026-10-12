@@ -10,14 +10,13 @@
     "build": "node -e \"console.log('Using pre-built frontend/dist')\""
   },
   "dependencies": {
-    "better-sqlite3": "^13.0.3",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "multer": "^1.4.5-lts.1",
-    "sql.js": "^1.14.2"
+    "mongodb": "^6.10.0",
+    "multer": "^1.4.5-lts.1"
   },
   "engines": {
-    "node": ">=22.5.0"
+    "node": ">=18.0.0"
   },
   "keywords": [
     "education-analytics",
