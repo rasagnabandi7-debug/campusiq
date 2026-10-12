@@ -655,12 +655,33 @@ app.get('/api/dashboard/distributions', (req, res) => {
     urgencyDist[rk.overall_urgency]++;
 
     const dept = s.department;
-    if (!deptAverages[dept]) deptAverages[dept] = { total: 0, sum: 0, acadRisk: 0, plcRisk: 0 };
+    if (!deptAverages[dept]) deptAverages[dept] = { total: 0, sum: 0, cgpaSum: 0, attSum: 0, acadRisk: 0, plcRisk: 0 };
     deptAverages[dept].total++;
     if (score !== null) deptAverages[dept].sum += score;
+    if (s.cgpa !== null) deptAverages[dept].cgpaSum += s.cgpa;
+    if (s.attendance_percentage !== null) deptAverages[dept].attSum += s.attendance_percentage;
     if (rk.academic_risk_level === 'High') deptAverages[dept].acadRisk++;
     if (rk.placement_risk_level === 'High') deptAverages[dept].plcRisk++;
   });
+
+  const shortNames = {
+    'Computer Science & Engineering': 'CSE',
+    'Information Technology': 'IT',
+    'Data Science & AI': 'AI/DS',
+    'Electronics & Communication': 'ECE',
+    'Electrical & Electronics': 'EEE',
+    'Mechanical Engineering': 'MECH'
+  };
+
+  const departmentPerformance = Object.keys(deptAverages).map(d => ({
+    department: shortNames[d] || d,
+    full_name: d,
+    student_count: deptAverages[d].total,
+    avg_success_score: Number((deptAverages[d].sum / Math.max(1, deptAverages[d].total)).toFixed(1)),
+    avg_cgpa: Number((deptAverages[d].cgpaSum / Math.max(1, deptAverages[d].total)).toFixed(2)),
+    avg_attendance: Number((deptAverages[d].attSum / Math.max(1, deptAverages[d].total)).toFixed(1)),
+    at_risk_students: deptAverages[d].acadRisk + deptAverages[d].plcRisk
+  }));
 
   const departmentBenchmark = Object.keys(deptAverages).map(d => ({
     department: d,
@@ -670,19 +691,42 @@ app.get('/api/dashboard/distributions', (req, res) => {
     placement_risk_pct: Number(((deptAverages[d].plcRisk / deptAverages[d].total) * 100).toFixed(1))
   }));
 
+  const academicRiskDist = Object.keys(academicRisk).map(level => ({
+    level, count: academicRisk[level], percentage: Number(((academicRisk[level] / total) * 100).toFixed(1))
+  }));
+
+  const placementRiskDist = Object.keys(placementRisk).map(level => ({
+    level, count: placementRisk[level], percentage: Number(((placementRisk[level] / total) * 100).toFixed(1))
+  }));
+
+  const segmentCounts = {};
+  students.forEach(s => {
+    const sc = computeStudentScore(s);
+    const segs = classifySegments(s, sc);
+    segs.forEach(seg => {
+      segmentCounts[seg] = (segmentCounts[seg] || 0) + 1;
+    });
+  });
+
+  const segmentDist = Object.keys(segmentCounts).map(seg => ({
+    segment: seg,
+    count: segmentCounts[seg],
+    percentage: Number(((segmentCounts[seg] / total) * 100).toFixed(1))
+  })).sort((a, b) => b.count - a.count);
+
   res.json({
     score_distribution: Object.keys(scoreBands).map(range => ({
       range,
       count: scoreBands[range],
       percentage: Number(((scoreBands[range] / total) * 100).toFixed(1))
     })),
+    academic_risk_distribution: academicRiskDist,
+    placement_risk_distribution: placementRiskDist,
+    department_performance: departmentPerformance,
+    segment_distribution: segmentDist,
     risk_breakdown: {
-      academic_risk: Object.keys(academicRisk).map(level => ({
-        level, count: academicRisk[level], percentage: Number(((academicRisk[level] / total) * 100).toFixed(1))
-      })),
-      placement_risk: Object.keys(placementRisk).map(level => ({
-        level, count: placementRisk[level], percentage: Number(((placementRisk[level] / total) * 100).toFixed(1))
-      })),
+      academic_risk: academicRiskDist,
+      placement_risk: placementRiskDist,
       composite_urgency: Object.keys(urgencyDist).map(level => ({
         urgency: level, count: urgencyDist[level], percentage: Number(((urgencyDist[level] / total) * 100).toFixed(1))
       }))
