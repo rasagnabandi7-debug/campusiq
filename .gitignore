@@ -13,3 +13,4 @@ Thumbs.db
 # Build temp
 .cache/
 .tmp/
+tunnel.log

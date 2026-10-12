@@ -15,19 +15,7 @@ import { api } from './services/api';
 import { GraduationCap, Heart, Terminal, Sparkles, ShieldCheck } from 'lucide-react';
 
 export function App() {
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
-    const saved = localStorage.getItem('campusiq_user');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) { return null; }
-    }
-    return {
-      name: 'Dr. Sunita Rao',
-      email: 'dean.academics@campusiq.edu',
-      role: 'Dean of Academics',
-      department: 'Academic Affairs',
-      avatarSeed: 'SR'
-    };
-  });
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
 
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
   const [selectedDept, setSelectedDept] = useState<string>('');
