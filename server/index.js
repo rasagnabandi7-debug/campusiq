@@ -7,7 +7,6 @@
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
-const { DatabaseSync } = require('node:sqlite');
 const path = require('path');
 const fs = require('fs');
 
@@ -18,9 +17,24 @@ app.use(cors());
 app.use(express.json());
 const upload = multer({ limits: { fileSize: 10 * 1024 * 1024 } });
 
-// Database Initialization
+// Universal SQLite Initialization (supports Node 20 on Render via better-sqlite3, and Node 22+ via node:sqlite)
+let db;
 const dbPath = path.join(__dirname, 'campusiq.db');
-const db = new DatabaseSync(dbPath);
+
+try {
+  const Database = require('better-sqlite3');
+  db = new Database(dbPath);
+  console.log('CampusIQ Database: connected via better-sqlite3');
+} catch (e1) {
+  try {
+    const { DatabaseSync } = require('node:sqlite');
+    db = new DatabaseSync(dbPath);
+    console.log('CampusIQ Database: connected via native node:sqlite');
+  } catch (e2) {
+    console.error('Fatal: Could not initialize SQLite database:', e1.message, e2.message);
+    process.exit(1);
+  }
+}
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS students (
