@@ -2,10 +2,31 @@
 
 > **"Predict Early. Intervene Smartly. Empower Every Student."**
 
-[![Status](https://img.shields.io/badge/Status-Deployment%20Ready-emerald.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)]()
-[![Stack](https://img.shields.io/badge/Stack-React%2019%20%7C%20FastAPI%20%7C%20Node%20%7C%20SQLite-indigo.svg)]()
-[![Architecture](https://img.shields.io/badge/AI-Explainable%20%2B%20Supervised%20ML-purple.svg)]()
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online%2024%2F7-emerald?style=for-the-badge&logo=render&logoColor=white)](https://campusiq-rgd5.onrender.com)
+[![Database](https://img.shields.io/badge/Database-MongoDB%20Atlas-green?style=for-the-badge&logo=mongodb&logoColor=white)](https://campusiq-rgd5.onrender.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/rasagnabandi7-debug/campusiq)
+
+---
+
+## 🌐 Live Cloud Deployment (Active 24/7)
+
+The application is deployed live in the cloud and accessible 24/7 for evaluation:
+
+👉 **Live URL:** **[https://campusiq-rgd5.onrender.com](https://campusiq-rgd5.onrender.com)**
+
+- **Cloud Platform:** Render.com (AWS High-Availability Infrastructure)
+- **Database:** MongoDB Atlas Cloud Database (`Cluster0`)
+- **Persistence:** Real-time bi-directional synchronization with cloud database
+
+### 🔑 Evaluator Test Credentials (1-Click Login)
+You can use the **1-Click Role Switcher** on the login page or enter any of the test accounts:
+
+| Role Persona | Test Email | Password | Primary Capabilities |
+| :--- | :--- | :--- | :--- |
+| **Academic Dean** | `dean@campusiq.edu` | `campusiq2026` | Full institutional oversight, retention forecasts, department benchmarks |
+| **Department Head (CSE)** | `hod.cse@campusiq.edu` | `campusiq2026` | Department-level drilldown, triage radar, faculty coordination |
+| **Placement Director** | `placement@campusiq.edu` | `campusiq2026` | Placement readiness index, coding vs. academic gap detection |
+| **Faculty Mentor** | `mentor@campusiq.edu` | `campusiq2026` | Student 360° individual profiles, intervention assignment & outcome tracking |
 
 ---
 
@@ -138,8 +159,8 @@ Trained on historical outcomes using Scikit-Learn **Random Forest Classifier**:
 ## 💻 Tech Stack & Deployment
 
 - **Frontend:** React 19, TypeScript, Vite, Tailwind CSS, Recharts, Lucide Icons.
-- **Backend:** Node.js 24 + Native SQLite (`node:sqlite`) & Python FastAPI + SQLAlchemy + Pandas + Scikit-Learn.
-- **Database:** SQLite (`campusiq.db`) with normalized student records.
+- **Backend:** Node.js Express (Render Cloud Web Service) & Python FastAPI + Pandas + Scikit-Learn.
+- **Database:** MongoDB Atlas Cloud Database (`Cluster0`) with high-speed memory caching.
 - **Data Ingestion:** Unified CSV & Excel parser with fuzzy column mapping.
 
 ---
