@@ -2,36 +2,23 @@
  * CampusIQ End-to-End System Verification Suite
  * Tests mathematical scoring calculations, database integrity, and REST API endpoints.
  */
-const http = require('http');
+const TARGET_URL = (process.argv[2] || 'http://127.0.0.1:8000').replace(/\/+$/, '');
 
-function makeRequest(path, method = 'GET', body = null) {
-  return new Promise((resolve, reject) => {
-    const options = {
-      hostname: '127.0.0.1',
-      port: 8000,
-      path: path,
-      method: method,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-
-    const req = http.request(options, (res) => {
-      let data = '';
-      res.on('data', (chunk) => { data += chunk; });
-      res.on('end', () => {
-        try {
-          resolve({ status: res.statusCode, body: JSON.parse(data) });
-        } catch (e) {
-          resolve({ status: res.statusCode, body: data });
-        }
-      });
-    });
-
-    req.on('error', (err) => reject(err));
-    if (body) req.write(JSON.stringify(body));
-    req.end();
-  });
+async function makeRequest(path, method = 'GET', body = null) {
+  const url = TARGET_URL + path;
+  const opts = {
+    method,
+    headers: { 'Content-Type': 'application/json' }
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(url, opts);
+  let data;
+  try {
+    data = await res.json();
+  } catch (e) {
+    data = await res.text();
+  }
+  return { status: res.status, body: data };
 }
 
 async function runVerification() {
